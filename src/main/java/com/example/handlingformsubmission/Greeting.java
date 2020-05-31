@@ -5,7 +5,14 @@ public class Greeting {
 	private String fname;
 	private String lname;
 	private String email;
+	private String hostname;
 	
+	public String getHostname() {
+		return hostname;
+	}
+	public void setHostname(String hostname) {
+		this.hostname = hostname;
+	}
 	public String getFname() {
 		return fname;
 	}

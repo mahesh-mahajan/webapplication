@@ -1,5 +1,8 @@
 package com.example.handlingformsubmission;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +27,18 @@ public class GreetingController {
 
 	@GetMapping("/greeting")
 	public String greetingForm(Model model) {
-		model.addAttribute("greeting", new Greeting());
+
+		Greeting greeting = new Greeting();
+
+		String hostname = "Unknown";
+		try {
+			InetAddress addr = InetAddress.getLocalHost();
+			hostname = addr.getHostName();
+			greeting.setHostname(hostname);
+		} catch (UnknownHostException ex) {
+			System.out.println("Hostname can not be resolved");
+		}
+		model.addAttribute("greeting", greeting);
 		return "greeting";
 	}
 
@@ -50,7 +64,7 @@ public class GreetingController {
 		String res = "Error in saving data!";
 		if (response.getBody().contains("success")) {
 			res = "Data saved successfully";
-		}		
+		}
 		model.addAttribute("res", res);
 		return "result";
 	}

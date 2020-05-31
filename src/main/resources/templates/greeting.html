@@ -9,6 +9,12 @@
 	<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
 		<table>
 			<tr>
+				<td>Hostname:</td>
+				<td>
+					<input type="text" th:field="*{hostname}" readonly="true" style="background-color: #C0C0C0;" />
+				</td>
+			</tr>
+			<tr>
 				<td>First Name:</td>
 				<td>
 					<input type="text" th:field="*{fname}" />
